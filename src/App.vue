@@ -1,18 +1,24 @@
 <template>
   <v-app>
     <v-container>
+      <v-text-field
+            v-model="search"
+            label="Pesquisar"
+            placeholder="Pesquisar"
+            solo
+          ></v-text-field>
       <v-card>
         <v-container>
           <v-row>
-            <v-col class="text-center" cols="3" v-for="pokemon in pokemons.slice(0,10)" :key="pokemon.name">
+            <v-col class="text-center" cols="3" v-for="pokemon in filtrar_pokemons" :key="pokemon.name">
               <v-card>
                 <v-container>
                   <img 
                   :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get_id(pokemon)}.png`"
                   :alt="pokemon.name" 
-                  width="80%">
-                  <h2 class="text-center">{{pokemon.name}}</h2>
-                  <p class="text-left">ID: 
+                  width="55%">
+                  <h2 class="text-center">{{get_name(pokemon)}}</h2>
+                  <p class="text-center">ID: 
                     {{get_id(pokemon)}}</p>
                   <p></p>
               
@@ -39,6 +45,7 @@ export default {
   data (){
     return {
       pokemons: [],
+      search: "",
     }
   },
 
@@ -52,9 +59,21 @@ export default {
   methods: {
     get_id(pokemon){
     return Number(pokemon.url.split("/")[6])
-    }
-  }
+    },
 
+    get_name(pokemon){
+      return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+    },
+  },
+
+  computed: {
+    filtrar_pokemons() {
+      return this.pokemons.filter((item) => {
+        const id = this.get_id(item);
+        return item.name.toLowerCase().includes(this.search.toLowerCase()) || id.toString() === this.search;
+      });
+  }
+}
 };
 </script>
 
