@@ -3,10 +3,21 @@
     <v-container>
       <v-card>
         <v-container>
-          {{pokemons}}
           <v-row>
-            <v-col cols="2" v-for="pokemon in pokemons" :key="pokemon.name">
-              <h2>{{pokemon.name}}</h2>
+            <v-col class="text-center" cols="3" v-for="pokemon in pokemons.slice(0,10)" :key="pokemon.name">
+              <v-card>
+                <v-container>
+                  <img 
+                  :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get_id(pokemon)}.png`"
+                  :alt="pokemon.name" 
+                  width="80%">
+                  <h2 class="text-center">{{pokemon.name}}</h2>
+                  <p class="text-left">ID: 
+                    {{get_id(pokemon)}}</p>
+                  <p></p>
+              
+                </v-container>
+              </v-card>
             </v-col>
           </v-row>
         </v-container>
@@ -36,7 +47,14 @@ export default {
     axios.get("https://pokeapi.co/api/v2/pokemon?limit=151").then((response) => {
       this.pokemons = response.data.results;
     });
+  },
+
+  methods: {
+    get_id(pokemon){
+    return Number(pokemon.url.split("/")[6])
+    }
   }
+
 };
 </script>
 
