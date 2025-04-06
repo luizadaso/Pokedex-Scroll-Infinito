@@ -2,9 +2,14 @@
   <v-app>
     <v-container>
       <v-card>
-
-        {{pokemons}}
-
+        <v-container>
+          {{pokemons}}
+          <v-row>
+            <v-col cols="2" v-for="pokemon in pokemons" :key="pokemon.name">
+              <h2>{{pokemon.name}}</h2>
+            </v-col>
+          </v-row>
+        </v-container>
       </v-card>
     </v-container>
   </v-app>
