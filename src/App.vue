@@ -1,10 +1,18 @@
 <template>
   <v-app>
-    
+    <v-container>
+      <v-card>
+
+        {{pokemons}}
+
+      </v-card>
+    </v-container>
   </v-app>
 </template>
 
 <script>
+
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -12,9 +20,18 @@ export default {
   components: {
   },
 
-  data: () => ({
-    //
-  }),
+  data (){
+    return {
+      pokemons: [],
+    }
+  },
+
+  mounted () {
+    console.log("Aplicação executada.");
+    axios.get("https://pokeapi.co/api/v2/pokemon?limit=151").then((response) => {
+      this.pokemons = response.data.results;
+    });
+  }
 };
 </script>
 
