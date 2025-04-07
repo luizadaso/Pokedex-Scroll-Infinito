@@ -32,7 +32,7 @@
       v-model="mostrar_dialog"
       width="50%"
     >
-    <v-card v-if="selecionar_pokemon" class="position-relative">
+    <v-card v-if="selecionar_pokemon" class="px-2">
         <v-btn icon @click="fechar_dialog" class="close-btn">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -42,6 +42,7 @@
             </v-col>
             <v-col cols="8" class="text-center"> 
               <h1>{{get_name(selecionar_pokemon)}}</h1>
+              <v-chip>Tipo:</v-chip>
               <v-chip class="ml-2" v-for="type in selecionar_pokemon.types" :key="type.slot">
                 {{type.type.name}}
               </v-chip>
@@ -58,7 +59,33 @@
               />
             </v-col>
           </v-row>
-          {{selecionar_pokemon}}
+          <h2>Movimentos</h2>
+          <v-simple-table
+    fixed-header
+    height="300px"
+  >
+    <template>
+      <thead>
+        <tr>
+          <th class="text-left">
+            Level
+          </th>
+          <th class="text-left">
+            Nome
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="item in filter_moves(selecionar_pokemon)" 
+          :key="item.move.name"
+        >
+          <td>0</td>
+          <td>{{ item.move.name }}</td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
         </v-container>
       </v-card>
     </v-dialog>
@@ -111,6 +138,8 @@ export default {
       this.selecionar_pokemon = null;
       this.mostrar_dialog = false;
     },
+
+    filter_moves(){}
   },
 
   computed: {
