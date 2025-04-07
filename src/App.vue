@@ -7,11 +7,10 @@
             placeholder="Pesquisar"
             solo
           ></v-text-field>
-      <v-card>
         <v-container>
           <v-row>
             <v-col class="text-center" cols="3" v-for="pokemon in filtrar_pokemons" :key="pokemon.name">
-              <v-card>
+              <v-card @click="mostrar_dialog = !mostrar_dialog">
                 <v-container>
                   <img 
                   :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get_id(pokemon)}.png`"
@@ -27,8 +26,24 @@
             </v-col>
           </v-row>
         </v-container>
-      </v-card>
     </v-container>
+    <v-dialog
+      v-model="mostrar_dialog"
+      width="500"
+    >
+      <v-card>
+        <v-card-title class="text-h5 grey lighten-2">
+          Privacy Policy
+        </v-card-title>
+
+        <v-card-text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </v-card-text>
+        <v-container>
+
+        </v-container>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
@@ -46,7 +61,9 @@ export default {
     return {
       pokemons: [],
       search: "",
-    }
+      mostrar_dialog: false,
+      selecionar_pokemon: null,
+    };
   },
 
   mounted () {
@@ -72,18 +89,14 @@ export default {
         const id = this.get_id(item);
         return item.name.toLowerCase().includes(this.search.toLowerCase()) || id.toString() === this.search;
       });
-  }
-}
+  },
+},
 };
 </script>
 
 <style>
 #app {
-  background: linear-gradient(
-      to bottom right,
-      rgba(10, 10, 10, 1),
-      rgba(12, 39, 63, 1)
-    )
+  background: linear-gradient(to bottom, #6ab7f5, #fff)
     no-repeat center center fixed !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -91,5 +104,5 @@ export default {
   background-size: cover !important;
   background-position: center;
   min-height: 100vh;
-}
+};
 </style>
