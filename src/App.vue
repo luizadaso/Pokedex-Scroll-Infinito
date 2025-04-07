@@ -10,12 +10,13 @@
         <v-container>
           <v-row>
             <v-col class="text-center" cols="3" v-for="pokemon in filtrar_pokemons" :key="pokemon.name">
-              <v-card @click="mostrar_dialog = !mostrar_dialog">
+              <v-card @click="mostrar_pokemon(get_id(pokemon))">
                 <v-container>
                   <img 
                   :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${get_id(pokemon)}.png`"
                   :alt="pokemon.name" 
-                  width="55%">
+                  width="55%"
+                  />
                   <h2 class="text-center">{{get_name(pokemon)}}</h2>
                   <p class="text-center">ID: 
                     {{get_id(pokemon)}}</p>
@@ -29,18 +30,26 @@
     </v-container>
     <v-dialog
       v-model="mostrar_dialog"
-      width="500"
+      width="50%"
     >
-      <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
-          Privacy Policy
-        </v-card-title>
-
-        <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </v-card-text>
+    <v-card v-if="selecionar_pokemon" class="position-relative">
+        <v-btn icon @click="fechar_dialog" class="close-btn">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
         <v-container>
-
+          <v-row class="d-flex align-center">
+            <v-col cols="4">
+              <img 
+                  :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selecionar_pokemon.id}.png`"
+                  :alt="selecionar_pokemon.name" 
+                  width="80%"
+                  />
+            </v-col>
+            <v-col cols="8">
+              <h1>{{selecionar_pokemon.name}}</h1>
+            </v-col>
+          </v-row>
+          {{selecionar_pokemon}}
         </v-container>
       </v-card>
     </v-dialog>
@@ -80,6 +89,18 @@ export default {
 
     get_name(pokemon){
       return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+    },
+
+    mostrar_pokemon(id){
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) => {
+        this.selecionar_pokemon = response.data;
+        this.mostrar_dialog = !this.mostrar_dialog;
+      });
+    },
+
+    fechar_dialog() {
+      this.selecionar_pokemon = null;
+      this.mostrar_dialog = false;
     },
   },
 
