@@ -38,15 +38,24 @@
         </v-btn>
         <v-container>
           <v-row class="d-flex align-center">
+            <v-col cols="8">
+            </v-col>
+            <v-col cols="8" class="text-center"> 
+              <h1>{{get_name(selecionar_pokemon)}}</h1>
+              <v-chip class="ml-2" v-for="type in selecionar_pokemon.types" :key="type.slot">
+                {{type.type.name}}
+              </v-chip>
+              <v-divider class="my-4">
+            </v-divider>
+              <v-chip>Altura: {{selecionar_pokemon.height * 2.54}} cm</v-chip>
+              <v-chip class="ml-2">Peso: {{(selecionar_pokemon.weight * 0.453592).toFixed(0)}} kg</v-chip>
+            </v-col>
             <v-col cols="4">
               <img 
-                  :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selecionar_pokemon.id}.png`"
-                  :alt="selecionar_pokemon.name" 
-                  width="80%"
-                  />
-            </v-col>
-            <v-col cols="8">
-              <h1>{{selecionar_pokemon.name}}</h1>
+                :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selecionar_pokemon.id}.png`"
+                :alt="selecionar_pokemon.name" 
+                width="80%"
+              />
             </v-col>
           </v-row>
           {{selecionar_pokemon}}
