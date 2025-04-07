@@ -33,9 +33,13 @@
       width="50%"
     >
     <v-card v-if="selecionar_pokemon" class="px-2">
-        <v-btn icon @click="fechar_dialog" class="close-btn">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
+      <v-row>
+            <v-col class="d-flex justify-end">
+              <v-btn icon @click="fechar_dialog" class="close-btn">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         <v-container>
           <v-row class="d-flex align-center">
             <v-col cols="8">
@@ -62,7 +66,7 @@
           <h2>Movimentos</h2>
           <v-simple-table
     fixed-header
-    height="300px"
+    height="100%"
   >
     <template>
       <thead>
