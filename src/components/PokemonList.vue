@@ -22,7 +22,16 @@
   <script>
   export default {
     name: 'PokemonList',
-    props: ['pokemons', 'search'],
+    props: {
+      pokemons: {
+        type: Array,
+        required: true,
+      },
+      search: {
+        type: String,
+        required: true,
+      },
+    },
     methods: {
       getId(pokemon) {
         return Number(pokemon.url.split("/")[6]);

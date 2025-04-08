@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-container>
-      <SearchBar :search="search" @input="search = $event" />
+      <SearchBar :search="search" @update:search="search = $event" />
       <PokemonList :pokemons="pokemons" :search="search" @show-pokemon="showPokemon" />
-      <PokemonDialog :showDialog="showDialog" :selectedPokemon="selectedPokemon" @close-dialog="closeDialog" />
+      <PokemonDialog :showDialog="showDialog" :selectedPokemon="selectedPokemon" @update:showDialog="showDialog = $event" />
     </v-container>
     <footer class="fixed-footer">
       <a href="https://github.com/luizadaso" target="_blank" rel="noopener noreferrer">
@@ -86,5 +86,6 @@ export default {
   color: #fff;
   text-align: center;
   padding: 10px 0;
+  box-shadow: 0 -2px 4px rgb(255, 255, 255);
 }
 </style>

@@ -34,26 +34,20 @@ export default {
   background-color: #e44e4e;
   z-index: 1000;
   padding: 10px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(255, 255, 255);
 }
 
 .fixed-title {
+  font-family: "Lilita One", sans-serif;
   text-align: center;
   margin: 0;
 }
 
 .fixed-search {
   margin-top: 10px;
+  margin-bottom: -5px;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-}
-
-.red-outline .v-input__control .v-input__slot::before {
-  border-color: red !important;
-}
-
-.red-outline .v-input__control .v-input__slot::after {
-  border-color: red !important;
 }
 </style>
