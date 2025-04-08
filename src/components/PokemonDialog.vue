@@ -20,12 +20,24 @@
               <v-chip>Altura: {{ selectedPokemon.height * 2.54 }} cm</v-chip>
               <v-chip class="ml-2">Peso: {{ (selectedPokemon.weight * 0.453592).toFixed(0) }} kg</v-chip>
             </v-col>
-            <v-col cols="4">
+            <v-col cols="3">
               <img 
                 :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedPokemon.id}.png`"
                 :alt="selectedPokemon.name" 
-                width="80%"
+                width="100%"
               />
+              <img 
+              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${selectedPokemon.id}.png`"
+              :alt="selectedPokemon.name + ' back'" 
+              class="pokemon-image"
+              width="50%"
+            />
+            <img 
+              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${selectedPokemon.id}.png`"
+              :alt="selectedPokemon.name + ' shiny'" 
+              class="pokemon-image"
+              width="50%"
+            />
             </v-col>
           </v-row>
           <h2>Movimentos</h2>
