@@ -2,6 +2,7 @@
   <div class="fixed-header">
     <h1 class="fixed-title">Pokédex de Ana</h1>
     <v-text-field
+      v-if="!hideSearch"
       :value="search"
       @input="$emit('update:search', $event)"
       label="Buscar Pokémon"
@@ -20,6 +21,10 @@ export default {
     search: {
       type: String,
       required: true,
+    },
+    hideSearch: {
+      type: Boolean,
+      default: false,
     },
   },
 };
@@ -45,7 +50,7 @@ export default {
 
 .fixed-search {
   margin-top: 10px;
-  margin-bottom: -5px;
+  margin-bottom: -10px;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
