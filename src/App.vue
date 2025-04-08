@@ -85,7 +85,7 @@ export default {
   background-color: #e44e4e;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 10px 0;
   box-shadow: 0 -2px 4px rgb(255, 255, 255);
 }
 </style>

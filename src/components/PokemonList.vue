@@ -7,10 +7,11 @@
               <img 
                 :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getId(pokemon)}.png`"
                 :alt="pokemon.name" 
+                class="pokemon-image"
                 width="55%"
               />
-              <h2 class="text-center">{{ getName(pokemon) }}</h2>
-              <p class="text-center">ID: {{ getId(pokemon) }}</p>
+              <h2 class="pokemon-name">{{ getName(pokemon) }}</h2>
+              <p class="pokemon-id">ID: {{ getId(pokemon) }}</p>
               <p></p>
             </v-container>
           </v-card>
@@ -70,4 +71,40 @@
     transform: scale(1.05);
     background-color: #e44e4e;
   }
+
+.pokemon-name {
+  font-size: 2vw; /* Tamanho do texto responsivo */
+}
+
+.pokemon-id {
+  font-size: 1.5vw; /* Tamanho do texto responsivo */
+}
+
+.pokemon-image {
+  width: 50%; /* Tamanho da imagem responsivo */
+}
+
+@media (max-width: 600px) {
+  .pokemon-name {
+    font-size: 2.5vw; /* Ajuste para telas menores */
+  }
+  .pokemon-id {
+    font-size: 2vw; /* Ajuste para telas menores */
+  }
+  .pokemon-image {
+    width: 85%; /* Ajuste para telas menores */
+  }
+}
+
+@media (min-width: 1200px) {
+  .pokemon-name {
+    font-size: 1.5vw; /* Ajuste para telas maiores */
+  }
+  .pokemon-id {
+    font-size: 1vw; /* Ajuste para telas maiores */
+  }
+  .pokemon-image {
+    width: 40%; /* Ajuste para telas maiores */
+  }
+}
   </style>

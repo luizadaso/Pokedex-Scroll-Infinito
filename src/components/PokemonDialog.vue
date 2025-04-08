@@ -1,5 +1,5 @@
 <template>
-    <v-dialog :value="showDialog" @input="$emit('update:showDialog', $event)" width="50%">
+    <v-dialog :value="showDialog" @input="$emit('update:showDialog', $event)" width="80%">
       <v-card v-if="selectedPokemon" class="pokemon-dialog">
         <v-row>
           <v-col class="d-flex justify-end">
@@ -94,9 +94,11 @@
   
   <style scoped>
   .pokemon-dialog {
-    background-color: #eea472;
-    color: white;
+    background-color: #cad1e9;
+    color: rgb(0, 0, 0);
     border-radius: 16px;
+    max-height: 80vh;
+    overflow-y: auto;
   }
   
   .close-btn {
