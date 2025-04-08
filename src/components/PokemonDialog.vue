@@ -12,7 +12,6 @@
           <v-row class="d-flex align-center">
             <v-col cols="8" class="text-center">
               <h1>{{ getName(selectedPokemon) }}</h1>
-              <v-chip>Tipo:</v-chip>
               <v-chip class="ml-2" v-for="type in selectedPokemon.types" :key="type.slot">
                 {{ type.type.name }}
               </v-chip>
@@ -21,22 +20,20 @@
               <v-chip class="ml-2">Peso: {{ (selectedPokemon.weight * 0.453592).toFixed(0) }} kg</v-chip>
             </v-col>
             <v-col cols="3">
-              <img 
+              <img
                 :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedPokemon.id}.png`"
                 :alt="selectedPokemon.name" 
-                width="100%"
+                class="pokemon-image-front"
               />
               <img 
               :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${selectedPokemon.id}.png`"
               :alt="selectedPokemon.name + ' back'" 
               class="pokemon-image"
-              width="50%"
             />
             <img 
               :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${selectedPokemon.id}.png`"
               :alt="selectedPokemon.name + ' shiny'" 
               class="pokemon-image"
-              width="50%"
             />
             </v-col>
           </v-row>
@@ -118,4 +115,28 @@
     top: 10px;
     right: 10px;
   }
+  .pokemon-image-front {
+    width: 80%;
+  }
+  .pokemon-image {
+    width: 50%;
+  }
+  .v-chip {
+    font-size: 2vh;
+  }
+
+  @media (max-width: 600px) {
+  .pokemon-id {
+    font-size: 1.8vw;
+  }
+  .pokemon-image-front {
+    width: 130%;
+  }
+  .pokemon-image {
+    width: 100%;
+  }
+  .v-chip {
+    font-size: 60%;
+  }
+}
   </style>

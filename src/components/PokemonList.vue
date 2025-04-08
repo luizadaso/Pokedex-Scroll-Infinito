@@ -1,7 +1,15 @@
 <template>
     <v-container class="content-container">
       <v-row>
-        <v-col class="text-center" cols="3" v-for="pokemon in filteredPokemons" :key="pokemon.name">
+        <v-col
+        class="text-center"
+        cols="4"
+        sm="4"
+        md="3"
+        lg="2"
+        xl="2"
+        v-for="pokemon in filteredPokemons" 
+        :key="pokemon.name">
           <v-card class="pokemon-card" elevation="8" @click="showPokemon(getId(pokemon))">
             <v-container>
               <img 
@@ -72,39 +80,27 @@
     background-color: #e44e4e;
   }
 
-.pokemon-name {
-  font-size: 2vw; /* Tamanho do texto responsivo */
-}
-
-.pokemon-id {
-  font-size: 1.5vw; /* Tamanho do texto responsivo */
-}
-
-.pokemon-image {
-  width: 50%; /* Tamanho da imagem responsivo */
-}
-
 @media (max-width: 600px) {
   .pokemon-name {
-    font-size: 2.5vw; /* Ajuste para telas menores */
+    font-size: 2.3vw; /* Ajuste para telas menores */
   }
   .pokemon-id {
     font-size: 2vw; /* Ajuste para telas menores */
   }
   .pokemon-image {
-    width: 85%; /* Ajuste para telas menores */
+    width: 100%; /* Ajuste para telas menores */
   }
 }
 
 @media (min-width: 1200px) {
   .pokemon-name {
-    font-size: 1.5vw; /* Ajuste para telas maiores */
+    font-size: 1.2vw; /* Ajuste para telas maiores */
   }
   .pokemon-id {
-    font-size: 1vw; /* Ajuste para telas maiores */
+    font-size: 0.8vw; /* Ajuste para telas maiores */
   }
   .pokemon-image {
-    width: 40%; /* Ajuste para telas maiores */
+    width: 80%; /* Ajuste para telas maiores */
   }
 }
   </style>
