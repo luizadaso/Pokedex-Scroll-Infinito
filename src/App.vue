@@ -2,8 +2,9 @@
   <v-app>
     <v-container>
       <SearchBar :search="search" :hideSearch="showDialog" @update:search="search = $event" />
-      <PokemonList :pokemons="pokemons" :search="search" @show-pokemon="showPokemon" />
-      <PokemonDialog :showDialog="showDialog" :selectedPokemon="selectedPokemon" @update:showDialog="showDialog = $event" />
+      <PokemonList :pokemons="displayedPokemons" :search="search" @show-pokemon="showPokemon" />
+      <div v-intersect="loadMore" class="load-more-trigger"></div>
+      <PokemonDialog :showDialog="showDialog" :selectedPokemon="selectedPokemon" @update:showDialog="showDialog = $event" @close-dialog="closeDialog" />
     </v-container>
     <footer class="fixed-footer">
       <a href="https://github.com/luizadaso" target="_blank" rel="noopener noreferrer">
@@ -29,18 +30,36 @@ export default {
   data() {
     return {
       pokemons: [],
+      displayedPokemons: [],
       search: "",
       showDialog: false,
       selectedPokemon: null,
+      limit: 50,
+      offset: 0,
+      loading: false,
     };
   },
   mounted() {
     console.log("Aplicação executada.");
-    axios.get("https://pokeapi.co/api/v2/pokemon?limit=151").then((response) => {
-      this.pokemons = response.data.results;
-    });
+    this.loadPokemons();
   },
   methods: {
+    loadPokemons() {
+      if (this.loading) return;
+      this.loading = true;
+      axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${this.limit}&offset=${this.offset}`).then((response) => {
+        this.pokemons = [...this.pokemons, ...response.data.results];
+        this.displayedPokemons = this.pokemons;
+        this.offset += this.limit;
+        this.loading = false;
+      });
+    },
+    loadMore(entries) {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        this.loadPokemons();
+      }
+    },
     showPokemon(id) {
       axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) => {
         this.selectedPokemon = response.data;
