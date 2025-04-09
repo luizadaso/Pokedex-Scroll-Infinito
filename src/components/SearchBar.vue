@@ -106,7 +106,8 @@ export default {
   margin-top: 0;
   margin-bottom: -2vh;
   width: 80%;
-  margin-left: auto;
+  align-items: center;
+  margin-left: 15%;
   margin-right: auto;
 }
 </style>
