@@ -1,6 +1,11 @@
 <template>
-  <div class="fixed-header">
-    <h1 class="fixed-title">Pokédex de Ana</h1>
+    <div class="fixed-header">
+    <h1 class="fixed-title">Pokédex de Ana
+    <img 
+    :src="require('../assets/pikachu.png')" 
+    alt="pikachu"
+    width="38px"
+    ></h1>
     <v-text-field
       v-if="!hideSearch"
       :value="search"
