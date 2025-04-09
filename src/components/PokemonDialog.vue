@@ -78,7 +78,10 @@
       },
       getMoveLevel(move) {
         for (let version of move.version_group_details) {
-          console.log(version);
+
+          if(version.move_learn_method.name == "level-up") {
+                return version.level_learned_at;
+            }
         }
         return 0;
       },
@@ -87,7 +90,7 @@
           let include = false;
           for (let version of item.version_group_details) {
             console.log(version.version_group);
-            if (version.version_group.name == "sword-shield" && version.move_learn_method.name != "machine") {
+            if (version.move_learn_method.name == "level-up") {
               include = true;
             }
           }

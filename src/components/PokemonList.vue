@@ -52,6 +52,7 @@
         this.$emit('show-pokemon', id);
       },
     },
+
     computed: {
       filteredPokemons() {
         return this.pokemons.filter((item) => {
