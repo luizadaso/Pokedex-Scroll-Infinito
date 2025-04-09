@@ -15,8 +15,8 @@
             <v-divider class="my-4"></v-divider>
             <PokemonTypes :types="selectedPokemon.types" />
             <v-divider class="my-4"></v-divider>
-            <v-chip>Altura: {{ selectedPokemon.height * 2.54 }} cm</v-chip>
-            <v-chip class="ml-2">Peso: {{ (selectedPokemon.weight * 0.453592).toFixed(0) }} kg</v-chip>
+            <v-chip>{{ $t('height') }}: {{ selectedPokemon.height * 2.54 }} cm</v-chip>
+            <v-chip class="ml-2">{{ $t('weight') }}: {{ (selectedPokemon.weight * 0.453592).toFixed(0) }} kg</v-chip>
           </v-col>
           <v-col cols="3">
             <img
@@ -37,9 +37,9 @@
           </v-col>
         </v-row>
         <v-tabs v-model="activeTab">
-          <v-tab>Movimentos</v-tab>
-          <v-tab>Versões de Jogos</v-tab>
-          <v-tab>Evoluções</v-tab>
+          <v-tab>{{ $t('moves') }}</v-tab>
+          <v-tab>{{ $t('gameVersions') }}</v-tab>
+          <v-tab>{{ $t('evolutions') }}</v-tab>
         </v-tabs>
         <v-tabs-items v-model="activeTab">
           <v-tab-item>
@@ -89,7 +89,7 @@
             </v-row>
             <v-row v-else>
               <v-col class="text-center">
-                <div>Nenhuma evolução encontrada</div>
+                <div>{{ $t('noEvolution') }}</div>
               </v-col>
             </v-row>
           </v-tab-item>

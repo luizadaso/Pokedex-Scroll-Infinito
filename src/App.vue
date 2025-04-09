@@ -1,6 +1,12 @@
 <template>
   <v-app>
     <v-container>
+      <v-select
+        v-model="currentLocale"
+        :items="locales"
+        label="Language"
+        @change="changeLocale"
+      ></v-select>
       <SearchBar 
         :search="search" 
         :hideSearch="showDialog" 
@@ -23,7 +29,7 @@
     </v-container>
     <footer class="fixed-footer">
       <a href="https://github.com/luizadaso" target="_blank" rel="noopener noreferrer">
-        Desenvolvido por @luizadaso
+        {{ $t('developedBy') }}
       </a>
     </footer>
   </v-app>

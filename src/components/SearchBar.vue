@@ -1,6 +1,6 @@
 <template>
   <div class="fixed-header">
-    <h1 class="fixed-title">Pokédex da Ana
+    <h1 class="fixed-title">{{ $t('welcome') }}
       <img 
         :src="require('../assets/pikachu.png')" 
         alt="pikachu"
@@ -12,7 +12,7 @@
         <v-text-field
           :value="search"
           @input="$emit('update:search', $event)"
-          label="Buscar Pokémon"
+          :label="$t('searchPlaceholder')"
           outlined
           dense
           color="yellow"
@@ -34,14 +34,14 @@
             <v-list>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title>Filtrar por:</v-list-item-title>
+                  <v-list-item-title>{{ $t('filterBy') }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
                 <v-radio-group v-model="selectedFilter" @change="updateFilter">
-                  <v-radio label="Nome" value="name"></v-radio>
-                  <v-radio label="ID" value="id"></v-radio>
-                  <v-radio label="Tipo" value="type"></v-radio>
+                  <v-radio :label="$t('name')" value="name"></v-radio>
+                  <v-radio :label="$t('id')" value="id"></v-radio>
+                  <v-radio :label="$t('type')" value="type"></v-radio>
                 </v-radio-group>
               </v-list-item>
             </v-list>
