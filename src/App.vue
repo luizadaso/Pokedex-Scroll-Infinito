@@ -1,10 +1,25 @@
 <template>
   <v-app>
     <v-container>
-      <SearchBar :search="search" :hideSearch="showDialog" @update:search="search = $event" />
-      <PokemonList :pokemons="displayedPokemons" :search="search" @show-pokemon="showPokemon" />
+      <SearchBar 
+        :search="search" 
+        :hideSearch="showDialog" 
+        @update:search="search = $event" 
+        @update:filter="updateFilter"
+      />
+      <PokemonList 
+        :pokemons="displayedPokemons" 
+        :search="search" 
+        :filter="selectedFilter"
+        @show-pokemon="showPokemon" 
+      />
       <div v-intersect="loadMore" class="load-more-trigger"></div>
-      <PokemonDialog :showDialog="showDialog" :selectedPokemon="selectedPokemon" @update:showDialog="showDialog = $event" @close-dialog="closeDialog" />
+      <PokemonDialog 
+        :showDialog="showDialog" 
+        :selectedPokemon="selectedPokemon" 
+        @update:showDialog="showDialog = $event" 
+        @close-dialog="closeDialog" 
+      />
     </v-container>
     <footer class="fixed-footer">
       <a href="https://github.com/luizadaso" target="_blank" rel="noopener noreferrer">
@@ -37,6 +52,7 @@ export default {
       limit: 50,
       offset: 0,
       loading: false,
+      selectedFilter: 'name',
     };
   },
   mounted() {
@@ -69,6 +85,9 @@ export default {
     closeDialog() {
       this.selectedPokemon = null;
       this.showDialog = false;
+    },
+    updateFilter(filter) {
+      this.selectedFilter = filter;
     },
   },
 };
