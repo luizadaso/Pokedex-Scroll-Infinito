@@ -26,34 +26,60 @@
                 class="pokemon-image-front"
               />
               <img 
-              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${selectedPokemon.id}.png`"
-              :alt="selectedPokemon.name + ' back'" 
-              class="pokemon-image"
-            />
-            <img 
-              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${selectedPokemon.id}.png`"
-              :alt="selectedPokemon.name + ' shiny'" 
-              class="pokemon-image"
-            />
+                :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${selectedPokemon.id}.png`"
+                :alt="selectedPokemon.name + ' back'" 
+                class="pokemon-image"
+              />
+              <img 
+                :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${selectedPokemon.id}.png`"
+                :alt="selectedPokemon.name + ' shiny'" 
+                class="pokemon-image"
+              />
             </v-col>
           </v-row>
-          <h2>Movimentos</h2>
-          <v-simple-table fixed-header height="100%">
-            <template>
-              <thead>
-                <tr>
-                  <th class="text-left">Level</th>
-                  <th class="text-left">Nome</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in filterMoves(selectedPokemon)" :key="item.move.name">
-                  <td>{{ getMoveLevel(item) }}</td>
-                  <td>{{ item.move.name }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
+          <v-tabs v-model="activeTab">
+            <v-tab>Movimentos</v-tab>
+            <v-tab>Versões de Jogos</v-tab>
+          </v-tabs>
+          <v-tabs-items v-model="activeTab">
+            <v-tab-item>
+              <v-data-table
+                :headers="moveHeaders"
+                :items="filterMoves(selectedPokemon)"
+                item-key="move.name"
+                show-expand
+                class="elevation-1"
+              >
+                <template v-slot:expanded-item="{ headers, item }">
+                  <td :colspan="headers.length">
+                    <v-list dense>
+                      <v-list-item v-for="version in item.version_group_details" :key="version.version_group.name">
+                        <v-list-item-content>
+                          <v-list-item-title>
+                            {{ version.version_group.name }}: Level {{ version.level_learned_at }}
+                          </v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list>
+                  </td>
+                </template>
+              </v-data-table>
+            </v-tab-item>
+            <v-tab-item>
+              <v-data-table
+                :headers="gameHeaders"
+                :items="selectedPokemon.game_indices"
+                item-key="version.name"
+                class="elevation-1"
+              >
+                <template v-slot:item="{ item }">
+                  <tr>
+                    <td>{{ item.version.name }}</td>
+                  </tr>
+                </template>
+              </v-data-table>
+            </v-tab-item>
+          </v-tabs-items>
         </v-container>
       </v-card>
     </v-dialog>
@@ -72,30 +98,42 @@
         required: false,
       },
     },
+    data() {
+      return {
+        activeTab: 0,
+        moveHeaders: [
+          { text: 'Level', value: 'level' },
+          { text: 'Nome', value: 'move.name' },
+        ],
+        gameHeaders: [
+          { text: 'Versão', value: 'version.name' },
+        ],
+      };
+    },
     methods: {
       getName(pokemon) {
         return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
       },
       getMoveLevel(move) {
         for (let version of move.version_group_details) {
-
-          if(version.move_learn_method.name == "level-up") {
-                return version.level_learned_at;
-            }
+          if (version.move_learn_method.name === 'level-up') {
+            return version.level_learned_at;
+          }
         }
         return 0;
       },
       filterMoves(pokemon) {
-        return pokemon.moves.filter((item) => {
-          let include = false;
-          for (let version of item.version_group_details) {
-            console.log(version.version_group);
-            if (version.move_learn_method.name == "level-up") {
-              include = true;
-            }
-          }
-          return include;
-        });
+        return pokemon.moves
+          .filter((item) => {
+            return item.version_group_details.some(
+              (version) => version.move_learn_method.name === 'level-up'
+            );
+          })
+          .map((item) => ({
+            ...item,
+            level: this.getMoveLevel(item),
+          }))
+          .sort((a, b) => a.level - b.level);
       },
       closeDialog() {
         this.$emit('update:showDialog', false);
@@ -118,28 +156,31 @@
     top: 10px;
     right: 10px;
   }
+  
   .pokemon-image-front {
     width: 80%;
   }
+  
   .pokemon-image {
     width: 50%;
   }
+  
   .v-chip {
     font-size: 2vh;
   }
-
+  
   @media (max-width: 600px) {
-  .pokemon-id {
-    font-size: 1.8vw;
+    .pokemon-id {
+      font-size: 1.8vw;
+    }
+    .pokemon-image-front {
+      width: 130%;
+    }
+    .pokemon-image {
+      width: 100%;
+    }
+    .v-chip {
+      font-size: 60%;
+    }
   }
-  .pokemon-image-front {
-    width: 130%;
-  }
-  .pokemon-image {
-    width: 100%;
-  }
-  .v-chip {
-    font-size: 60%;
-  }
-}
   </style>

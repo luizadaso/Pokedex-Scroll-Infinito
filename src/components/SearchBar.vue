@@ -1,6 +1,6 @@
 <template>
     <div class="fixed-header">
-    <h1 class="fixed-title">Pokédex de Ana
+    <h1 class="fixed-title">Pokédex da Ana
     <img 
     :src="require('../assets/pikachu.png')" 
     alt="pikachu"
