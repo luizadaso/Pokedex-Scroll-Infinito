@@ -13,14 +13,7 @@
           <v-col cols="8" class="text-center">
             <h1>{{ getName(selectedPokemon) }}</h1>
             <v-divider class="my-4"></v-divider>
-            <v-chip
-              class="ml-2"
-              v-for="type in selectedPokemon.types"
-              :key="type.slot"
-              :color="getTypeColor(type.type.name)"
-            >
-              {{ type.type.name.toUpperCase() }}
-            </v-chip>
+            <PokemonTypes :types="selectedPokemon.types" />
             <v-divider class="my-4"></v-divider>
             <v-chip>Altura: {{ selectedPokemon.height * 2.54 }} cm</v-chip>
             <v-chip class="ml-2">Peso: {{ (selectedPokemon.weight * 0.453592).toFixed(0) }} kg</v-chip>
@@ -108,9 +101,13 @@
 
 <script>
 import axios from 'axios';
+import PokemonTypes from './PokemonTypes.vue';
 
 export default {
   name: 'PokemonDialog',
+  components: {
+    PokemonTypes,
+  },
   props: {
     showDialog: {
       type: Boolean,
@@ -198,42 +195,6 @@ export default {
       const parts = url.split('/');
       return parts[parts.length - 2];
     },
-    getTypeColor(type) {
-      switch (type) {
-        case "grass":
-          return "green";
-        case "poison":
-          return "purple";
-        case "water":
-          return "blue";
-        case "bug":
-          return "light-green";
-        case "ground":
-          return "lime darken-3";
-        case "fairy":
-          return "pink lighten-4";
-        case "fighting":
-          return "red darken-4";
-        case "fire":
-          return "red";
-        case "flying":
-          return "teal";
-        case "psychic":
-          return "pink";
-        case "electric":
-          return "yellow darken-2";
-        case "rock":
-          return "brown";
-        case "ice":
-          return "cyan";
-        case "dragon":
-          return "purple";
-        case "normal":
-          return "grey";
-        default:
-          return "grey";
-      }
-    },
     closeDialog() {
       this.$emit('update:showDialog', false);
     },
@@ -268,10 +229,6 @@ export default {
   width: 50%;
 }
 
-.v-chip {
-  font-size: 2vh;
-}
-
 @media (max-width: 600px) {
   .pokemon-id {
     font-size: 1.8vw;
@@ -286,8 +243,5 @@ export default {
   .pokemon-image-evolutions {
   width: 80%;
 }
-  .v-chip {
-    font-size: 60%;
-  }
 }
 </style>
