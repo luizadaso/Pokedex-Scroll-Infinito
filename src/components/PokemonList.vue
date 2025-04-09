@@ -46,6 +46,16 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      filteredPokemons: [],
+    };
+  },
+  watch: {
+    search: 'filterPokemons',
+    filter: 'filterPokemons',
+    pokemons: 'filterPokemons',
+  },
   methods: {
     getId(pokemon) {
       return Number(pokemon.url.split("/")[6]);
@@ -56,22 +66,35 @@ export default {
     showPokemon(id) {
       this.$emit('show-pokemon', id);
     },
-  },
-  computed: {
-    filteredPokemons() {
+    async fetchPokemonDetails(pokemon) {
+      const response = await fetch(pokemon.url);
+      return await response.json();
+    },
+    async filterPokemons() {
       if (this.filter === 'name') {
-        return this.pokemons.filter(pokemon =>
+        this.filteredPokemons = this.pokemons.filter(pokemon =>
           pokemon.name.toLowerCase().includes(this.search.toLowerCase())
         );
       } else if (this.filter === 'id') {
-        return this.pokemons.filter(pokemon =>
+        this.filteredPokemons = this.pokemons.filter(pokemon =>
           this.getId(pokemon).toString().includes(this.search)
         );
       } else if (this.filter === 'type') {
-        return this.pokemons;
+        const filteredPokemons = [];
+        for (const pokemon of this.pokemons) {
+          const details = await this.fetchPokemonDetails(pokemon);
+          if (details.types.some(type => type.type.name.toLowerCase().includes(this.search.toLowerCase()))) {
+            filteredPokemons.push(pokemon);
+          }
+        }
+        this.filteredPokemons = filteredPokemons;
+      } else {
+        this.filteredPokemons = this.pokemons;
       }
-      return this.pokemons;
     },
+  },
+  mounted() {
+    this.filterPokemons();
   },
 };
 </script>
@@ -95,25 +118,25 @@ export default {
 
 @media (max-width: 600px) {
   .pokemon-name {
-    font-size: 2.3vw;
+    font-size: 2.3vw; /* Ajuste para telas menores */
   }
   .pokemon-id {
-    font-size: 2vw;
+    font-size: 2vw; /* Ajuste para telas menores */
   }
   .pokemon-image {
-    width: 100%;
+    width: 100%; /* Ajuste para telas menores */
   }
 }
 
 @media (min-width: 1200px) {
   .pokemon-name {
-    font-size: 1.2vw;
+    font-size: 1.2vw; /* Ajuste para telas maiores */
   }
   .pokemon-id {
-    font-size: 0.8vw;
+    font-size: 0.8vw; /* Ajuste para telas maiores */
   }
   .pokemon-image {
-    width: 80%;
+    width: 80%; /* Ajuste para telas maiores */
   }
 }
 </style>
