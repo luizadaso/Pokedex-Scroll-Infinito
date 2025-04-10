@@ -18,7 +18,7 @@
           </v-col>
           <v-col cols="3">
             <img
-              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${selectedPokemon.id}.gif`"
+              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${selectedPokemon.id}.gif`"
               :alt="selectedPokemon.name" 
               class="pokemon-image-front"
             />
