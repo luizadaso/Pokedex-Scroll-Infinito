@@ -75,17 +75,80 @@
             </v-row>
           </v-tab-item>
           <v-tab-item>
-            <v-row>
-              <v-col cols="12" class="text-center">
-                <img
-                  v-for="(sprite, index) in spriteUrls"
-                  :key="index"
-                  :src="sprite"
-                  :alt="`Sprite ${index + 1}`"
-                  class="pokemon-sprite"
-                />
-              </v-col>
-            </v-row>
+            <v-tabs v-model="activeSpriteTab">
+              <v-tab>Sprites</v-tab>
+              <v-tab>dream_world</v-tab>
+              <v-tab>home</v-tab>
+              <v-tab>official-artwork</v-tab>
+              <v-tab>showdown</v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="activeSpriteTab">
+              <v-tab-item>
+                <v-row>
+                  <v-col cols="12" class="text-center">
+                    <img
+                      v-for="(sprite, index) in spriteUrls"
+                      :key="index"
+                      :src="sprite"
+                      :alt="`Sprite ${index + 1}`"
+                      class="pokemon-sprite"
+                    />
+                  </v-col>
+                </v-row>
+              </v-tab-item>
+              <v-tab-item>
+                <v-row>
+                  <v-col cols="12" class="text-center">
+                    <img
+                      v-for="(sprite, index) in dreamWorldSprites"
+                      :key="index"
+                      :src="sprite"
+                      :alt="`Dream World Sprite ${index + 1}`"
+                      class="pokemon-sprite"
+                    />
+                  </v-col>
+                </v-row>
+              </v-tab-item>
+              <v-tab-item>
+                <v-row>
+                  <v-col cols="12" class="text-center">
+                    <img
+                      v-for="(sprite, index) in homeSprites"
+                      :key="index"
+                      :src="sprite"
+                      :alt="`Home Sprite ${index + 1}`"
+                      class="pokemon-sprite"
+                    />
+                  </v-col>
+                </v-row>
+              </v-tab-item>
+              <v-tab-item>
+                <v-row>
+                  <v-col cols="12" class="text-center">
+                    <img
+                      v-for="(sprite, index) in officialArtworkSprites"
+                      :key="index"
+                      :src="sprite"
+                      :alt="`Official Artwork Sprite ${index + 1}`"
+                      class="pokemon-sprite"
+                    />
+                  </v-col>
+                </v-row>
+              </v-tab-item>
+              <v-tab-item>
+                <v-row>
+                  <v-col cols="12" class="text-center">
+                    <img
+                      v-for="(sprite, index) in showdownSprites"
+                      :key="index"
+                      :src="sprite"
+                      :alt="`Showdown Sprite ${index + 1}`"
+                      class="pokemon-sprite"
+                    />
+                  </v-col>
+                </v-row>
+              </v-tab-item>
+            </v-tabs-items>
           </v-tab-item>
         </v-tabs-items>
       </v-container>
@@ -115,6 +178,7 @@ export default {
   data() {
     return {
       activeTab: 0,
+      activeSpriteTab: 0,
       moveHeaders: [
         { text: 'Level', value: 'level', sortable: false },
         { text: 'Nome', value: 'move.name', sortable: false },
@@ -124,6 +188,10 @@ export default {
       ],
       evolutions: [],
       spriteUrls: [],
+      dreamWorldSprites: [],
+      homeSprites: [],
+      officialArtworkSprites: [],
+      showdownSprites: [],
     };
   },
   watch: {
@@ -196,6 +264,10 @@ export default {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`);
         const sprites = response.data.sprites;
         this.spriteUrls = Object.values(sprites).filter(sprite => typeof sprite === 'string');
+        this.dreamWorldSprites = Object.values(sprites.other.dream_world).filter(sprite => typeof sprite === 'string');
+        this.homeSprites = Object.values(sprites.other.home).filter(sprite => typeof sprite === 'string');
+        this.officialArtworkSprites = Object.values(sprites.other['official-artwork']).filter(sprite => typeof sprite === 'string');
+        this.showdownSprites = Object.values(sprites.versions['generation-v']['black-white'].animated).filter(sprite => typeof sprite === 'string');
       } catch (error) {
         console.error('Erro ao buscar sprites:', error);
       }
@@ -208,7 +280,6 @@ export default {
 </script>
 
 <style scoped>
-
 .pokemon-dialog {
   background-color: #cad1e9;
   color: rgb(0, 0, 0);
@@ -237,7 +308,6 @@ export default {
 }
 
 @media (max-width: 600px) {
-
   .pokemon-dialog {
     max-height: 65vh;
   }
