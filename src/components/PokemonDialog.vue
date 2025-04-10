@@ -232,7 +232,7 @@ export default {
 }
 
 .pokemon-sprite {
-  width: 12%;
+  width: 100px;
   margin: 5px;
 }
 
