@@ -15,8 +15,6 @@
             <v-divider class="my-4"></v-divider>
             <PokemonTypes :types="selectedPokemon.types" />
             <v-divider class="my-4"></v-divider>
-            <v-chip>{{ $t('height') }}: {{ selectedPokemon.height * 2.54 }} cm</v-chip>
-            <v-chip class="ml-2">{{ $t('weight') }}: {{ (selectedPokemon.weight * 0.453592).toFixed(0) }} kg</v-chip>
           </v-col>
           <v-col cols="3">
             <img
@@ -24,22 +22,13 @@
               :alt="selectedPokemon.name" 
               class="pokemon-image-front"
             />
-            <img 
-              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${selectedPokemon.id}.png`"
-              :alt="selectedPokemon.name + ' back'" 
-              class="pokemon-image"
-            />
-            <img 
-              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${selectedPokemon.id}.png`"
-              :alt="selectedPokemon.name + ' shiny'" 
-              class="pokemon-image"
-            />
           </v-col>
         </v-row>
         <v-tabs v-model="activeTab">
           <v-tab>{{ $t('moves') }}</v-tab>
           <v-tab>{{ $t('gameVersions') }}</v-tab>
           <v-tab>{{ $t('evolutions') }}</v-tab>
+          <v-tab>Sprites</v-tab>
         </v-tabs>
         <v-tabs-items v-model="activeTab">
           <v-tab-item>
@@ -93,6 +82,19 @@
               </v-col>
             </v-row>
           </v-tab-item>
+          <v-tab-item>
+            <v-row>
+              <v-col cols="12" class="text-center">
+                <img
+                  v-for="(sprite, index) in spriteUrls"
+                  :key="index"
+                  :src="sprite"
+                  :alt="`Sprite ${index + 1}`"
+                  class="pokemon-sprite"
+                />
+              </v-col>
+            </v-row>
+          </v-tab-item>
         </v-tabs-items>
       </v-container>
     </v-card>
@@ -129,12 +131,14 @@ export default {
         { text: 'Versão', value: 'version.name' },
       ],
       evolutions: [],
+      spriteUrls: [],
     };
   },
   watch: {
     selectedPokemon(newVal) {
       if (newVal) {
         this.fetchEvolutions(newVal);
+        this.fetchSprites(newVal);
       }
     },
   },
@@ -195,6 +199,15 @@ export default {
       const parts = url.split('/');
       return parts[parts.length - 2];
     },
+    async fetchSprites(pokemon) {
+      try {
+        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`);
+        const sprites = response.data.sprites;
+        this.spriteUrls = Object.values(sprites).filter(sprite => typeof sprite === 'string');
+      } catch (error) {
+        console.error('Erro ao buscar sprites:', error);
+      }
+    },
     closeDialog() {
       this.$emit('update:showDialog', false);
     },
@@ -226,7 +239,12 @@ export default {
 }
 
 .pokemon-image-evolutions {
-  width: 50%;
+  width: 40%;
+}
+
+.pokemon-sprite {
+  width: 15%;
+  margin: 5px;
 }
 
 @media (max-width: 600px) {
@@ -241,7 +259,11 @@ export default {
   }
 
   .pokemon-image-evolutions {
-  width: 80%;
-}
+    width: 80%;
+  }
+
+  .pokemon-sprite {
+    width: 100px;
+  }
 }
 </style>
