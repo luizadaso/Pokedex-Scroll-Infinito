@@ -14,7 +14,7 @@
         <v-card class="pokemon-card" elevation="8" @click="showPokemon(getId(pokemon))">
           <v-container>
             <img 
-              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getId(pokemon)}.png`"
+              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/${getId(pokemon)}.png`"
               :alt="pokemon.name" 
               class="pokemon-image"
               width="55%"
