@@ -3,7 +3,7 @@
     <v-row>
       <v-col
         class="text-center"
-        cols="4"
+        cols="6"
         sm="4"
         md="3"
         lg="2"
@@ -116,27 +116,29 @@ export default {
   background-color: #e44e4e;
 }
 
+/* Ajuste para telas menores */
 @media (max-width: 600px) {
   .pokemon-name {
-    font-size: 2.3vw; /* Ajuste para telas menores */
+    font-size: 5vw; 
   }
   .pokemon-id {
-    font-size: 2vw; /* Ajuste para telas menores */
+    font-size: 3vw;
   }
   .pokemon-image {
-    width: 100%; /* Ajuste para telas menores */
+    width: 100%;
   }
 }
 
+/* Ajuste para telas maiores */
 @media (min-width: 1200px) {
   .pokemon-name {
-    font-size: 1.2vw; /* Ajuste para telas maiores */
+    font-size: 1.2vw; 
   }
   .pokemon-id {
-    font-size: 0.8vw; /* Ajuste para telas maiores */
+    font-size: 0.8vw;
   }
   .pokemon-image {
-    width: 80%; /* Ajuste para telas maiores */
+    width: 80%;
   }
 }
 </style>

@@ -248,10 +248,7 @@ export default {
     font-size: 1.8vw;
   }
   .pokemon-image-front {
-    width: 130%;
-  }
-  .pokemon-image {
-    width: 100%;
+    width: 150%;
   }
 
   .pokemon-image-evolutions {
