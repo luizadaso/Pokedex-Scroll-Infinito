@@ -1,36 +1,59 @@
-# Pokedex da Ana
+# Pokédex da Ana <img src="https://github.com/user-attachments/assets/0828d876-3b45-4a29-85e2-3c7ea3cd7a24" width="40px" alt="pikachu"/>
 
-![Pokedex da Ana](https://raw.githubusercontent.com/luizadaso/Pokedex-da-Ana/main/assets/pikachu.png)
+<img src="https://github.com/user-attachments/assets/6642c728-939c-4df3-8dba-d9eac35fd514" width="63%" alt="desktop"/> <img src="https://github.com/user-attachments/assets/8df41f11-9eca-4994-920b-372b8e376460" width="15%" alt="smartphone"/>
 
 ## Descrição
 
-A **Pokedex da Ana** é uma aplicação web que permite aos usuários buscar e visualizar informações detalhadas sobre Pokémon. A aplicação utiliza a API do PokeAPI para obter dados em tempo real e oferece uma interface amigável e responsiva construída com Vue.js e Vuetify.
+**Pokédex da Ana** é uma aplicação web que permite aos usuários buscar e visualizar informações detalhadas sobre Pokémon. A aplicação utiliza a API do [PokeAPI](https://pokeapi.co/) para obter dados em tempo real e oferece uma interface amigável e responsiva construída com Vue.js e Vuetify.
 
 ## Funcionalidades
 
-- **Busca de Pokémon**: Permite buscar Pokémon por nome, ID ou tipo.
-- **Visualização Detalhada**: Exibe informações detalhadas sobre cada Pokémon, incluindo tipos, altura, peso, movimentos e evoluções.
-- **Filtro de Busca**: Oferece opções de filtro para buscar Pokémon por nome, ID ou tipo.
-- **Internacionalização**: Suporte a múltiplos idiomas (Português, Inglês e Espanhol).
-- **Scroll Infinito**: Carregamento contínuo de Pokémon conforme o usuário rola a página.
-- **Interface Responsiva**: Design adaptável para diferentes tamanhos de tela.
+- **Listagem dos Pokémon com Scroll Infinito**: A aplicação carrega Pokémon continuamente conforme o usuário rola a página, proporcionando uma experiência de navegação fluida.
+- **Filtros de Busca**: Os usuários podem filtrar Pokémon por nome, ID, tipo e espécie, facilitando a localização do Pokémon desejado.
+- **Detalhamento Completo do Pokémon**:
+  - **Sprites**: Exibição de todos os sprites do Pokémon, incluindo as versões normais, de costas e brilhantes.
+  - **Movimentos de Ataque**: Listagem completa dos movimentos de ataque que o Pokémon pode aprender.
+  - **Evoluções**: Exibição das evoluções do Pokémon, quando há.
+  - **Games**: Listagem de todos os jogos em que o Pokémon está presente.
 
 ## Tecnologias Utilizadas
 
 - **Vue.js**: Framework JavaScript progressivo para construção de interfaces de usuário.
 - **Vuetify**: Biblioteca de componentes UI para Vue.js baseada no Material Design.
 - **Vue Router**: Gerenciamento de rotas para navegação entre páginas.
-- **Vuex**: Gerenciamento de estado centralizado (opcional, não utilizado neste projeto).
 - **Vue I18n**: Internacionalização para suporte a múltiplos idiomas.
 - **Axios**: Cliente HTTP para fazer requisições à API do PokeAPI.
 - **PokeAPI**: API pública para obter dados sobre Pokémon.
 
-## Inovações
+### Estrutura do Projeto
 
-- **Internacionalização Completa**: Suporte a três idiomas (Português, Inglês e Espanhol) com fácil alternância entre eles.
-- **Scroll Infinito**: Implementação de carregamento contínuo de dados para uma experiência de usuário mais fluida.
-- **Filtro Avançado**: Opções de filtro que permitem buscar Pokémon por nome, ID ou tipo, melhorando a usabilidade.
-- **Design Responsivo**: Interface adaptável que garante uma boa experiência de usuário em dispositivos móveis e desktops.
+```
+Pokedex-da-Ana/
+├── node_modules/...
+├── public/
+│   ├── favicon.png
+│   └── index.html
+├── src/
+│   ├── assets/
+│   │   └── pikachu.png
+│   ├── components/
+│   │   ├── PokemonDialog.vue
+│   │   ├── PokemonList.vue
+│   │   ├── PokemonTypes.vue
+│   │   └── SearchBar.vue
+│   ├── plugins/
+│   │   ├── i18n.js
+│   │   └── vuetify.js
+│   ├── App.vue
+│   └── main.js
+├── .gitignore
+├── babel.config.js
+├── jsconfig.json
+├── package.json
+├── package-lock.json
+├── README.md
+└── vue.config.js
+```
 
 ## Instalação
 
@@ -38,3 +61,14 @@ A **Pokedex da Ana** é uma aplicação web que permite aos usuários buscar e v
    ```bash
    git clone https://github.com/luizadaso/Pokedex-da-Ana.git
    cd Pokedex-da-Ana
+
+## Autora
+
+Para mais informações, sinta-se à vontade para entrar em contato:
+
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/57cac2a3-49b1-4a0a-aef3-e968523971eb" width="15%" alt="autora" />
+</div>
+
+- [Github](https://github.com/luizadaso)
+- [Linkedin](https://www.linkedin.com/in/luizadaso)
