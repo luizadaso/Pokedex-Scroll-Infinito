@@ -4,7 +4,6 @@
       <v-select
         v-model="currentLocale"
         :items="locales"
-        label="Language"
         @change="changeLocale"
       ></v-select>
       <SearchBar 
@@ -40,6 +39,7 @@ import axios from 'axios';
 import SearchBar from './components/SearchBar.vue';
 import PokemonList from './components/PokemonList.vue';
 import PokemonDialog from './components/PokemonDialog.vue';
+import i18n from './plugins/i18n';
 
 export default {
   name: 'App',
@@ -50,6 +50,12 @@ export default {
   },
   data() {
     return {
+      currentLocale: 'pt',
+      locales: [
+        { text: 'Português', value: 'pt' },
+        { text: 'English', value: 'en' },
+        { text: 'Español', value: 'es' },
+      ],
       pokemons: [],
       displayedPokemons: [],
       search: "",
@@ -60,6 +66,11 @@ export default {
       loading: false,
       selectedFilter: 'name',
     };
+  },
+  watch: {
+    currentLocale(newLocale) {
+      this.changeLocale(newLocale);
+    },
   },
   mounted() {
     console.log("Aplicação executada.");
@@ -95,6 +106,9 @@ export default {
     updateFilter(filter) {
       this.selectedFilter = filter;
     },
+    changeLocale(locale) {
+      i18n.locale = locale;
+    },
   },
 };
 </script>
@@ -110,6 +124,10 @@ export default {
   min-height: 100vh;
   padding-top: 2rem;
   color: white;
+}
+
+.v-select {
+  margin-top: 100px;
 }
 
 .fixed-footer a {

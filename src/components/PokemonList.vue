@@ -101,7 +101,7 @@ export default {
 
 <style scoped>
 .content-container {
-  margin-top: 50px;
+  margin-top: 0px;
 }
 
 .pokemon-card {
