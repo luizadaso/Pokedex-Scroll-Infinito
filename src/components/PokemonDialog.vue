@@ -18,7 +18,7 @@
           </v-col>
           <v-col cols="3">
             <img
-              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${selectedPokemon.id}.png`"
+              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${selectedPokemon.id}.gif`"
               :alt="selectedPokemon.name" 
               class="pokemon-image-front"
             />
@@ -76,7 +76,7 @@
           </v-tab-item>
           <v-tab-item>
             <v-tabs v-model="activeSpriteTab">
-              <v-tab>Sprites</v-tab>
+              <v-tab>Principal</v-tab>
               <v-tab>dream_world</v-tab>
               <v-tab>home</v-tab>
               <v-tab>official-artwork</v-tab>
