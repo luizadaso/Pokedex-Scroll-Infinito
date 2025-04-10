@@ -11,6 +11,7 @@
         :hideSearch="showDialog" 
         @update:search="search = $event" 
         @update:filter="updateFilter"
+        @update:type="updateType"
       />
       <PokemonList 
         :pokemons="displayedPokemons" 
@@ -65,6 +66,7 @@ export default {
       offset: 0,
       loading: false,
       selectedFilter: 'name',
+      selectedType: null,
     };
   },
   watch: {
@@ -83,8 +85,16 @@ export default {
     loadPokemons() {
       if (this.loading) return;
       this.loading = true;
-      axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${this.limit}&offset=${this.offset}`).then((response) => {
-        this.pokemons = [...this.pokemons, ...response.data.results];
+      let url = `https://pokeapi.co/api/v2/pokemon?limit=${this.limit}&offset=${this.offset}`;
+      if (this.selectedType) {
+        url = `https://pokeapi.co/api/v2/type/${this.selectedType}`;
+      }
+      axios.get(url).then((response) => {
+        if (this.selectedType) {
+          this.pokemons = response.data.pokemon.map(p => p.pokemon);
+        } else {
+          this.pokemons = [...this.pokemons, ...response.data.results];
+        }
         this.displayedPokemons = this.pokemons;
         this.offset += this.limit;
         this.loading = false;
@@ -108,6 +118,12 @@ export default {
     },
     updateFilter(filter) {
       this.selectedFilter = filter;
+    },
+    updateType(type) {
+      this.selectedType = type;
+      this.offset = 0; // Reset offset for new type search
+      this.pokemons = []; // Clear current pokemons
+      this.loadPokemons();
     },
     changeLocale(locale) {
       i18n.locale = locale;
