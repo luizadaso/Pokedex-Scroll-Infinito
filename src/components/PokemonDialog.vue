@@ -231,11 +231,7 @@ export default {
 }
 
 .pokemon-image-front {
-  width: 80%;
-}
-
-.pokemon-image {
-  width: 50%;
+  width: 100%;
 }
 
 .pokemon-image-evolutions {
@@ -243,7 +239,7 @@ export default {
 }
 
 .pokemon-sprite {
-  width: 15%;
+  width: 12%;
   margin: 5px;
 }
 
