@@ -36,21 +36,13 @@
               :headers="moveHeaders"
               :items="filterMoves(selectedPokemon)"
               item-key="move.name"
-              show-expand
               class="elevation-1"
             >
-              <template v-slot:expanded-item="{ headers, item }">
-                <td :colspan="headers.length">
-                  <v-list dense>
-                    <v-list-item v-for="version in item.version_group_details" :key="version.version_group.name">
-                      <v-list-item-content>
-                        <v-list-item-title>
-                          {{ version.version_group.name }}: Level {{ version.level_learned_at }}
-                        </v-list-item-title>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                </td>
+              <template v-slot:item="{ item }">
+                <tr>
+                  <td>{{ item.level }}</td>
+                  <td>{{ item.move.name }}</td>
+                </tr>
               </template>
             </v-data-table>
           </v-tab-item>
