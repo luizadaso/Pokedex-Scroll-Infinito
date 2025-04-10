@@ -9,7 +9,7 @@ module.exports = defineConfig({
       entry: 'src/main.js',
       template: 'public/index.html',
       filename: 'index.html',
-      title: 'Pokédex de Ana',
+      title: 'Pokédex da Ana',
     }
   }
 })
