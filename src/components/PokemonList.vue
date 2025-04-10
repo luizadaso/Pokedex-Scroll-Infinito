@@ -110,6 +110,7 @@ export default {
   border-radius: 16px;
   transition: transform 0.2s ease;
   margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .pokemon-card:hover {

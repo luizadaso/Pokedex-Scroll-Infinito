@@ -32,6 +32,7 @@
         {{ $t('developedBy') }}
       </a>
     </footer>
+    <v-divider class="my-6"></v-divider>
   </v-app>
 </template>
 

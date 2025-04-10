@@ -214,6 +214,7 @@ export default {
   color: rgb(0, 0, 0);
   border-radius: 16px;
   overflow-y: auto;
+  max-height: 75vh;
 }
 
 .close-btn {
