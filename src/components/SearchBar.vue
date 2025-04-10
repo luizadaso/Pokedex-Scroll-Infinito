@@ -55,13 +55,13 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" v-on="on" outlined>
-              {{ selectedType ? selectedType : 'Todos' }}
+              {{ selectedType ? selectedType : $t('filterType') }}
             </v-btn>
           </template>
           <v-card>
             <v-list class="scrollable-list">
               <v-list-item @click="selectType(null)">
-                <v-list-item-title>Todos</v-list-item-title>
+                <v-list-item-title>{{ $t('filterType') }}</v-list-item-title>
               </v-list-item>
               <v-list-item
                 v-for="type in types"
