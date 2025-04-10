@@ -101,7 +101,7 @@ export default {
 
 <style scoped>
 .content-container {
-  margin-top: 120px;
+  margin-top: 50px;
 }
 
 .pokemon-card {
@@ -109,6 +109,7 @@ export default {
   color: rgb(0, 0, 0);
   border-radius: 16px;
   transition: transform 0.2s ease;
+  margin-top: 0px;
 }
 
 .pokemon-card:hover {

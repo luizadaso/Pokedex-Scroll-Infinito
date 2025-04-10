@@ -103,8 +103,8 @@ export default {
 }
 
 .fixed-search {
-  margin-top: 0;
-  margin-bottom: -2vh;
+  margin-bottom: -15px;
+  margin-top: 5px;
   width: 80%;
   align-items: center;
   margin-left: 15%;

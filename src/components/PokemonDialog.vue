@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :value="showDialog" @input="$emit('update:showDialog', $event)" width="80%">
+  <v-dialog :value="showDialog" @input="$emit('update:showDialog', $event)" max-width="80vh">
     <v-card v-if="selectedPokemon" class="pokemon-dialog">
       <v-row>
         <v-col class="d-flex justify-end">
@@ -208,10 +208,12 @@ export default {
 </script>
 
 <style scoped>
+
 .pokemon-dialog {
   background-color: #cad1e9;
   color: rgb(0, 0, 0);
   border-radius: 16px;
+  max-width: 80vh;
   max-height: 80vh;
   overflow-y: auto;
 }
@@ -236,11 +238,17 @@ export default {
 }
 
 @media (max-width: 600px) {
+
+  .pokemon-dialog {
+    max-height: 65vh;
+  }
+
   .pokemon-id {
     font-size: 1.8vw;
   }
+
   .pokemon-image-front {
-    width: 150%;
+    width: 160%;
   }
 
   .pokemon-image-evolutions {
