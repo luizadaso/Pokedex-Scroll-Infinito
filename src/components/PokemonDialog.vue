@@ -116,11 +116,11 @@ export default {
     return {
       activeTab: 0,
       moveHeaders: [
-        { text: 'Level', value: 'level' },
-        { text: 'Nome', value: 'move.name' },
+        { text: 'Level', value: 'level', sortable: false },
+        { text: 'Nome', value: 'move.name', sortable: false },
       ],
       gameHeaders: [
-        { text: 'Versão', value: 'version.name' },
+        { text: 'Versão', value: 'version.name', sortable: false },
       ],
       evolutions: [],
       spriteUrls: [],
@@ -213,8 +213,6 @@ export default {
   background-color: #cad1e9;
   color: rgb(0, 0, 0);
   border-radius: 16px;
-  max-width: 80vh;
-  max-height: 80vh;
   overflow-y: auto;
 }
 
