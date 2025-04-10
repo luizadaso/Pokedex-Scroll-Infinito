@@ -19,6 +19,7 @@ const messages = {
     evolutions: 'Evolutions',
     height: 'Height',
     weight: 'Weight',
+    pageTitle: 'Ana\'s Pokédex',
   },
   pt: {
     welcome: 'Pokédex da Ana',
@@ -34,6 +35,7 @@ const messages = {
     evolutions: 'Evoluções',
     height: 'Altura',
     weight: 'Peso',
+    pageTitle: 'Pokédex da Ana',
   },
   es: {
     welcome: 'Pokédex de Ana',
@@ -49,6 +51,7 @@ const messages = {
     evolutions: 'Evoluciones',
     height: 'Altura',
     weight: 'Peso',
+    pageTitle: 'Pokédex de Ana',
   },
 };
 

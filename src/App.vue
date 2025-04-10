@@ -71,6 +71,9 @@ export default {
     currentLocale(newLocale) {
       this.changeLocale(newLocale);
     },
+    '$i18n.locale': function() {
+      document.title = this.$t('pageTitle');
+    },
   },
   mounted() {
     console.log("Aplicação executada.");
