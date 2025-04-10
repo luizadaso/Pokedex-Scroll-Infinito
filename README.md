@@ -9,12 +9,17 @@
 ## Funcionalidades
 
 - **Listagem dos Pokémon com Scroll Infinito**: A aplicação carrega Pokémon continuamente conforme o usuário rola a página, proporcionando uma experiência de navegação fluida.
-- **Filtros de Busca**: Os usuários podem filtrar Pokémon por nome, ID, tipo e espécie, facilitando a localização do Pokémon desejado.
+- **Filtros de Busca**: Os usuários podem filtrar Pokémon por nome/espécie, ID e tipo, facilitando a localização do Pokémon desejado.
 - **Detalhamento Completo do Pokémon**:
   - **Sprites**: Exibição de todos os sprites do Pokémon, incluindo as versões normais, de costas e brilhantes.
   - **Movimentos de Ataque**: Listagem completa dos movimentos de ataque que o Pokémon pode aprender.
   - **Evoluções**: Exibição das evoluções do Pokémon, quando há.
   - **Games**: Listagem de todos os jogos em que o Pokémon está presente.
+ 
+### Recursos Adicionais
+
+- **Responsividade**: A aplicação foi projetada para ser responsiva, oferecendo uma experiência de usuário otimizada para desktop, notebook e smartphones.
+- **Suporte Multilíngue**: A aplicação suporta múltiplas línguas, incluindo português, inglês e espanhol, permitindo que usuários de diferentes regiões utilizem a aplicação em seu idioma preferido.
 
 ## Tecnologias Utilizadas
 
