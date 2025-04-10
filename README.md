@@ -1,6 +1,6 @@
 # Pokédex da Ana <img src="https://github.com/user-attachments/assets/0828d876-3b45-4a29-85e2-3c7ea3cd7a24" width="40px" alt="pikachu"/>
 
-<img src="https://github.com/user-attachments/assets/6642c728-939c-4df3-8dba-d9eac35fd514" width="63%" alt="desktop"/> <img src="https://github.com/user-attachments/assets/8df41f11-9eca-4994-920b-372b8e376460" width="15%" alt="smartphone"/>
+<img src="https://github.com/user-attachments/assets/396fc43a-870b-438d-9dce-3c33193157dc" width="63%" alt="desktop"/> <img src="https://github.com/user-attachments/assets/e6125b7b-f609-433b-9271-b1cccf443316" width="15%" alt="smartphone"/>
 
 ## Descrição
 
@@ -35,7 +35,8 @@ Pokedex-da-Ana/
 │   └── index.html
 ├── src/
 │   ├── assets/
-│   │   └── pikachu.png
+├── │   ├── pikachu.png
+│   │   └── preview.png
 │   ├── components/
 │   │   ├── PokemonDialog.vue
 │   │   ├── PokemonList.vue
