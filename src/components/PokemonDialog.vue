@@ -76,11 +76,12 @@
           </v-tab-item>
           <v-tab-item>
             <v-tabs v-model="activeSpriteTab">
-              <v-tab>Principal</v-tab>
+              <v-tab>Original</v-tab>
               <v-tab>dream_world</v-tab>
               <v-tab>home</v-tab>
               <v-tab>official-artwork</v-tab>
               <v-tab>showdown</v-tab>
+              <v-tab v-for="gen in generations" :key="gen">{{ gen }}</v-tab>
             </v-tabs>
             <v-tabs-items v-model="activeSpriteTab">
               <v-tab-item>
@@ -148,6 +149,26 @@
                   </v-col>
                 </v-row>
               </v-tab-item>
+              <v-tab-item v-for="gen in generations" :key="gen">
+                <v-tabs v-model="activeGenerationTab[gen]">
+                  <v-tab v-for="version in generationVersions[gen]" :key="version">{{ version }}</v-tab>
+                </v-tabs>
+                <v-tabs-items v-model="activeGenerationTab[gen]">
+                  <v-tab-item v-for="version in generationVersions[gen]" :key="version">
+                    <v-row>
+                      <v-col cols="12" class="text-center">
+                        <img
+                          v-for="(sprite, index) in generationSprites[gen][version]"
+                          :key="index"
+                          :src="sprite"
+                          :alt="`${gen} ${version} Sprite ${index + 1}`"
+                          class="pokemon-sprite"
+                        />
+                      </v-col>
+                    </v-row>
+                  </v-tab-item>
+                </v-tabs-items>
+              </v-tab-item>
             </v-tabs-items>
           </v-tab-item>
         </v-tabs-items>
@@ -179,6 +200,16 @@ export default {
     return {
       activeTab: 0,
       activeSpriteTab: 0,
+      activeGenerationTab: {
+        'generation-i': 0,
+        'generation-ii': 0,
+        'generation-iii': 0,
+        'generation-iv': 0,
+        'generation-v': 0,
+        'generation-vi': 0,
+        'generation-vii': 0,
+        'generation-viii': 0,
+      },
       moveHeaders: [
         { text: 'Level', value: 'level', sortable: false },
         { text: 'Nome', value: 'move.name', sortable: false },
@@ -192,6 +223,36 @@ export default {
       homeSprites: [],
       officialArtworkSprites: [],
       showdownSprites: [],
+      generations: [
+        'generation-i',
+        'generation-ii',
+        'generation-iii',
+        'generation-iv',
+        'generation-v',
+        'generation-vi',
+        'generation-vii',
+        'generation-viii',
+      ],
+      generationVersions: {
+        'generation-i': ['red-blue', 'yellow'],
+        'generation-ii': ['gold', 'silver', 'crystal'],
+        'generation-iii': ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
+        'generation-iv': ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+        'generation-v': ['black-white'],
+        'generation-vi': ['x-y', 'omegaruby-alphasapphire'],
+        'generation-vii': ['ultra-sun-ultra-moon'],
+        'generation-viii': ['sword-shield'],
+      },
+      generationSprites: {
+        'generation-i': { 'red-blue': [], 'yellow': [] },
+        'generation-ii': { 'gold': [], 'silver': [], 'crystal': [] },
+        'generation-iii': { 'ruby-sapphire': [], 'emerald': [], 'firered-leafgreen': [] },
+        'generation-iv': { 'diamond-pearl': [], 'platinum': [], 'heartgold-soulsilver': [] },
+        'generation-v': { 'black-white': [] },
+        'generation-vi': { 'x-y': [], 'omegaruby-alphasapphire': [] },
+        'generation-vii': { 'ultra-sun-ultra-moon': [] },
+        'generation-viii': { 'sword-shield': [] },
+      },
     };
   },
   watch: {
@@ -268,6 +329,19 @@ export default {
         this.homeSprites = Object.values(sprites.other.home).filter(sprite => typeof sprite === 'string');
         this.officialArtworkSprites = Object.values(sprites.other['official-artwork']).filter(sprite => typeof sprite === 'string');
         this.showdownSprites = Object.values(sprites.versions['generation-v']['black-white'].animated).filter(sprite => typeof sprite === 'string');
+        
+        for (let gen of this.generations) {
+          for (let version of this.generationVersions[gen]) {
+            if (sprites.versions[gen] && sprites.versions[gen][version]) {
+              this.generationSprites[gen][version] = Object.values(sprites.versions[gen][version]).filter(sprite => typeof sprite === 'string');
+            }
+          }
+        }
+
+        // Special case for generation-viii icons
+        if (sprites.versions['generation-viii'] && sprites.versions['generation-viii'].icons) {
+          this.generationSprites['generation-viii']['sword-shield'] = Object.values(sprites.versions['generation-viii'].icons).filter(sprite => typeof sprite === 'string');
+        }
       } catch (error) {
         console.error('Erro ao buscar sprites:', error);
       }
