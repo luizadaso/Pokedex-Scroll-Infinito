@@ -1,6 +1,6 @@
 # Pokédex da Ana <img src="https://github.com/user-attachments/assets/0828d876-3b45-4a29-85e2-3c7ea3cd7a24" width="40px" alt="pikachu"/>
 
-<img src="https://github.com/user-attachments/assets/396fc43a-870b-438d-9dce-3c33193157dc" width="63%" alt="desktop"/> <img src="https://github.com/user-attachments/assets/e6125b7b-f609-433b-9271-b1cccf443316" width="15%" alt="smartphone"/>
+<img src="https://github.com/user-attachments/assets/7a192e17-948a-4852-b04a-76240a3f225e" width="60%" alt="smartphone"/>
 
 ## Descrição
 
